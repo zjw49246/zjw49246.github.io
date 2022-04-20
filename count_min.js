@@ -98,10 +98,10 @@ function control_ctm () {
         d3.selectAll('#ctm_plot_div div').remove();
         const max_y = Math.floor(Math.max.apply(null, result.slice()) + 5);
         let text_plot_input = d3.select("#ctm_plot_div").append("div");
-        text_plot_input.html("<br>The frequency of input:");
+        text_plot_input.html("<br>The true frequency of input:");
         ctm_plot(input.slice(), null, [0, input_len], max_y);
         let text_plot_est = d3.select("#ctm_plot_div").append("div");
-        text_plot_est.html("The estimate frequency of input:");
+        text_plot_est.html("The true(red) and estimate(blue) frequency of input:");
         ctm_plot(input.slice(), result.slice(), [0, input_len], max_y);
         i++;
         if (i >= x.length) {
