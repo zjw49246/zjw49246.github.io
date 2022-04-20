@@ -97,6 +97,8 @@ function control_ctm () {
         d3.selectAll('#ctm_plot_div svg').remove();
         d3.selectAll('#ctm_plot_div div').remove();
         const max_y = Math.floor(Math.max.apply(null, result.slice()) + 5);
+        let text_plot_cur = d3.select("#ctm_plot_div").append("div");
+        text_plot_cur.html(`<br>Current input: ${value}`);
         let text_plot_input = d3.select("#ctm_plot_div").append("div");
         text_plot_input.html("<br>The true frequency of input:");
         ctm_plot(input.slice(), null, [0, input_len], max_y);
