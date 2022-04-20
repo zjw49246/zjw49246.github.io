@@ -72,10 +72,10 @@ function control_hash () {
     range_hx = data_range_hx.range
 
     let text_plot_x = d3.select("#hash_plot_div").append("div");
-    text_plot_x.html("The distribution of input values:");
+    text_plot_x.html("<br>The distribution of input values:");
     hash_plot(data_x, range_x);
     let text_plot_hx = d3.select("#hash_plot_div").append("div");
-    text_plot_hx.html("The distribution of output hash values:");
+    text_plot_hx.html("<br>The distribution of output hash values:");
     hash_plot(data_hx, range_hx);
 
     let pair_num = size * (size - 1) / 2;
@@ -86,7 +86,7 @@ function control_hash () {
     let collide_rate = collide_num / pair_num;
     let collide_rate_bar = 1 / Math.pow(2, output_dim);
     let text_collide_rate = d3.select("#hash_plot_div").append("div");
-    text_collide_rate.html(`The collision rate: ${collide_rate * 100}%
+    text_collide_rate.html(`<br>The collision rate: ${collide_rate * 100}%
                             <br> 1/M = ${collide_rate_bar * 100}%`);
 }
 
