@@ -1,0 +1,223 @@
+body {
+    font-family: Courier;
+    background-color:white;
+  }
+  
+.bar { fill: tomato; }
+.finished { fill: rgba(3,205,3,0.8); }
+
+#icon {
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  padding-top: 0px;
+  -webkit-transition: width 2s, padding-top 2s;
+  transition: width 2s, padding-top 2s;
+  height: auto;
+}
+
+img:hover {
+  padding-top: 50px;
+  width: 100px;
+}
+
+#main {
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 35px;
+  font-family: "PT Sans", sans-serif;
+  line-height: 30px;
+  text-align: justify;
+  text-justify: auto;
+  color: rgb(20, 20, 10);
+  font-size: 18px;
+}
+
+#title {
+  font-family: "Roboto Slab", serif;
+  font-size: 50px;
+  color: var(--c3);
+  text-align: center;
+  line-height: 70px;
+}
+
+#name {
+  font-family: "Roboto Slab", serif;
+  color: var(--c5);
+  text-align: center;
+  line-height: 0;
+  margin-top: 50px;
+}
+
+.container {
+  /* display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 900px;
+  padding: 5px;
+  margin: 0px; */
+  margin: auto;
+  width: 900px;
+  padding: 10px;
+}
+
+.container h1 {
+  font-family: "Roboto Slab", serif;
+}
+
+h2 {
+  padding: 10px;
+  font-family: "Roboto Slab", serif;
+  color: balck;
+  text-align: center;
+}
+
+h3 {
+  padding: 10px;
+  font-family: "Times New Roman", serif;
+  color: balck;
+  text-align: center;
+}
+
+p {
+  font-family: "Times New Roman";
+  background-color: aliceblue;
+  border-radius: 16px;
+  width: 750px;
+  text-indent: 40px;
+  margin: auto;
+  padding: 10px;
+}
+
+.tool {
+  font-family: "Times New Roman";
+  font-size: medium;
+  background-color: aliceblue;
+  border-radius: 16px;
+  width: 750px;
+  text-indent: 40px;
+  margin: auto;
+  padding: 10px;
+}
+
+.controls {
+  font-family: Courier;
+  color: black;
+  flex: 0 1 auto;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+  width: 750px;
+  font-size: 0.8em;
+  height: auto;
+  /* margin-bottom: 10px; */
+  margin: auto;
+  /* width: 750px;
+  padding: 10px; */
+}
+
+div#hash_plot {
+  width: 700px;
+  height: 1000px;
+  margin: auto;
+  background-color: antiquewhite;
+  flex: 0 1 auto;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-self: center;
+  text-align: left;
+  border-radius: 16px;
+}
+
+div#ctm_plot {
+  width: 700px;
+  height: 750px;
+  margin: auto;
+  background-color: antiquewhite;
+  flex: 0 1 auto;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-self: center;
+  text-align: left;
+  border-radius: 16px;
+}
+
+svg {
+  flex: 0 1 auto;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+}
+
+p {
+  margin: 0px;
+}
+
+button {
+height: 24px;
+font-size: 0.8em;
+width: auto;
+font-family: Courier New, Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+outline: none;
+}
+
+h1 { 
+font-size: 1.6em; 
+font-family: Helvetica Neue, sans-serif;
+font-weight: 100;
+color: black;
+padding: 0px;
+flex: 0 1 auto;
+flex-flow: row wrap;
+justify-content: center;
+align-self: center;
+text-align: center;
+}
+
+div.sortBox {
+color: black;
+width: 900px;
+height: auto;
+display: flex;
+flex-flow: row wrap;
+margin: auto;
+}
+
+div.graphBox {
+flex: 0 1 auto;
+width: 400px;
+padding: 8px;
+margin: 5px auto;
+}
+
+span.graphCaption {
+float:left;
+font-family: Helvetica;
+}
+
+svg {
+position: relative;
+flex: 0 1 auto;
+padding: 5px;
+}
+
+#input_dim {
+  width: 50px
+}
+
+#output_dim {
+  width: 50px
+}
+
+#input_size {
+  width: 50px
+}
