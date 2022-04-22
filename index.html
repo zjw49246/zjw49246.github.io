@@ -83,7 +83,7 @@
             to decimal numbers in the result) and <i>m</i>&times;<i>u</i> {0, 1}
             matrix. Next, hashing values will be calculated and the distribution 
             of the input and output will be displayed. In addition, the collision rate
-            and 1/<i>M</i> will be calculated and displayed.
+            and the upper bound of collision probability 1/<i>M</i> will be calculated and displayed.
         </p>
         <p class="tool">
             From this visualization, we can see that the collision rate is close
@@ -92,6 +92,21 @@
             between input dim and output dim becomes larger, the number of collisions
             increases. In addition, the increase of the number of inputs also increases
             collisions.
+        </p>
+        <p class="tool"><b>Examples:</b>
+            <br>1. You can set input dim as 10, output dim as 8 and number of inputs
+            as 100, and click the "Submit" button. You can see that a random 8 &times; 10
+            matrix has been generated, In the top graph, we can see the distribution 
+            of input values, 100 <b>distinct</b> numbers between 0 and 1023. In the bottom graph,
+            we can see the distribution of output values, 100 numbers between 0 and 255.
+            Some of them have frequency more than 1, which means that there are collisions
+            after hashing. The collision rate and 1/<i>M</i> are also displayed. Try to 
+            click the "Submit" button multiple times, you can see that collision rate is
+            smaller than 1/<i>M</i> at most time and no more than 1/<i>M</i> in average.
+            <br>2. Try to decrease output dim to 5, you can see that frequencies in the 
+            bottom graph increases which means that number of collisions increases. In
+            addition, collision rate also tends to increase. Try more values of these
+            arguments and see how the results look like.
         </p>
     </div>
     <div class="container">
@@ -159,9 +174,30 @@
             frequency estimate is. In addition, higher output dim also decrease
             the error of estimate.
         </p>
+        <p class="tool"><b>Examples:</b>
+            <br>1. You can set number of inputs as 100, output dim as 4 and number
+            of hash functions as 1, and click "Submit" button. You will see that at
+            each step, there is a new input, and the frequency of that input increases
+            by 1 (one new red line of length 1 appears in both the top and the bottom graph). 
+            Then, the tool executes count-min sketch algorithm and calculates the 
+            estimate frequency of all the inputs (displayed as blue lines in the bottom 
+            graph). We can see that some
+            blue lines are covered by red lines but the others are not, which means the
+            estimate frequencies are biased and the uncovered blue lines represents the bias part.
+            <br>2. Click the "Reset" button to clear the display. Try to increase output 
+            dim to 6 and number of hash functions to 10, and click the "Submit" button.
+            You will see that the number of uncovered blue lines decreases, which means 
+            that the estimate frequencies become more accurate. Try more values of these
+            arguments and see how the results look like.
+        </p>
         <p class="tool">
-            <b>Note:</b> Please do not click "Submit" button multiple times. If there is 
+            <b>Note:</b> 
+            <br>1. Please use the "Reset" button to clear the display. 
+            Please do not click the "Submit" button multiple times. If there is 
             any error after clicking more than once, please refresh the page.
+            <br>2. The input dim is hardcoded as 7 in this tool to avoid too many arguments.
+            You can change its value by modifying the 
+            <a href="https://github.com/zjw49246/zjw49246.github.io">source codes</a>.
         </p>
     </div>
     <div class="container">

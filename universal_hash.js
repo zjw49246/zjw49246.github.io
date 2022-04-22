@@ -87,7 +87,7 @@ function control_hash () {
     let collide_rate_bar = 1 / Math.pow(2, output_dim);
     let text_collide_rate = d3.select("#hash_plot_div").append("div");
     text_collide_rate.html(`<br>The collision rate: ${collide_rate * 100}%
-                            <br> 1/M = ${collide_rate_bar * 100}%`);
+                            <br> 1/<i>M</i> = ${collide_rate_bar * 100}%`);
 }
 
 function getRandomInt(max) {
