@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Hash and Count-Min</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Noto+Sans|PT+Sans" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="./d3-matrix/dist/matrix.css"> -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- <script src="./d3-matrix/dist/d3.min.js"></script>
+    <script src="./d3-matrix/dist/matrix.js"></script> -->
+</head>
+<body>
+    <div id="main">
+        <div id = "icon">
+            <img src="hash_func.png" alt="graph icon"/>
+          </div>
+        <h1 id="title">Universal Hashing and Its Application to Count-Min Sketch</h1>
+        <h4 id="name">Junwei Zhou</h4>
+        
+        <h2 id="Introduction">Introduction</h2>
+        <p>
+            In the fields of streaming algorithms and cryptography, hash 
+            functions are very important. Good hash functions should have
+            both efficiency and small collision probability. Completely 
+            random hash functions have small collision probability 1/<i>M</i> where 
+            <i>M</i> is the size of the output space of the hash function. However,
+            representing completely random hash functions costs big space, and
+            calculating hash values is also very time-consuming. Therefore,
+            we would like to propose new hash functions based on the completely
+            random hash functions. And we are going to show such functions in 
+            the following.
+
+        </p>
+        <p>
+            After we obtained good hash functions. We can apply them in the 
+            count-min sketch algorithm, which is one of streaming algorithms 
+            designed to process stream data with small space and time. We can
+            use hash functions to map the original data into a much smaller
+            space where processing the mapped data costs much less space and 
+            time. However, since hash functions cause collisions in the mapping,
+            the results in the mapped space is an estimate of those in the
+            original space. Therefore, we need to pick suitable hash function
+            sets to maintain both efficiency and accuracy of estimates.
+        </p>
+    </div>
+    
+    
+    
+    <div id="main">
+        <h2>Universal Hashing</h2>
+        <p>
+            The definition of universal hash families is as follows:
+            <br><b>Definition.</b> A family <i>H</i> of hash functions mapping
+            <i>U</i> to <i>M</i> is universal if, for every two different keys
+            <i>x</i> &ne; <i>y</i> &in; <i>U</i>, we have 
+            Pr<sub>h &larr; H</sub>[<i>h(x)</i> = <i>h(y)</i>] &leq; 1/<i>M</i>
+        </p>
+        <p>
+            We constrcut an efficient universal hashing family as follows:
+            <br>1. Suppose <i>U</i> = 2<sup><i>u</i></sup> and 
+            <i>M</i> = 2<sup><i>m</i></sup>.
+            <br>2. Randomly initialize a matrix <i>A</i> = 
+            {0, 1}<sup><i>m</i>&times;<i>u</i></sup>.
+            <br>3. For an input vector <i>x</i> &in; {0, 1}<sup><i>u</i></sup>
+            (we can regard it as the binary representation of a number), 
+            <i>h<sub>A</sub></i>(<i>x</i>) = <i>Ax</i>, and the calculation is done
+            modulo 2.
+            <br>4. The efficient universal hashing family is <i>H</i> = 
+            {<i>h<sub>A</sub></i>: <i>U</i> &rarr; <i>M</i> | 
+            <i>A</i> &in; {0, 1}<sup><i>m</i>&times;<i>u</i></sup>}.
+        </p>
+        <br>
+        <br>
+        <h3>Visualization tool for universal hash functions</h3>
+        <p class="tool">
+            To use this tool, you need to enter input dim <i>u</i>, output 
+            dim <i>m</i> and number of inputs <i>N</i>. Then, 
+            after clicking the "Submit" button, this tool will 
+            randomizes <i>N</i> distinct <i>u</i>-bit {0, 1} vectors (has been converted
+            to decimal numbers in the result) and <i>m</i>&times;<i>u</i> {0, 1}
+            matrix. Next, hashing values will be calculated and the distribution 
+            of the input and output will be displayed. In addition, the collision rate
+            and the upper bound of collision probability 1/<i>M</i> will be calculated and displayed.
+        </p>
+        <p class="tool">
+            From this visualization, we can see that the collision rate is close
+            to <i>M</i>, and is no more than <i>M</i> in average, which confirms
+            the small collision rate of this hash family. And as the difference
+            between input dim and output dim becomes larger, the number of collisions
+            increases. In addition, the increase of the number of inputs also increases
+            collisions.
+        </p>
+        <p class="tool"><b>Examples:</b>
+            <br>1. You can set input dim as 10, output dim as 8 and number of inputs
+            as 100, and click the "Submit" button. You can see that a random 8 &times; 10
+            matrix has been generated, In the top graph, we can see the distribution 
+            of input values, 100 <b>distinct</b> numbers between 0 and 1023. In the bottom graph,
+            we can see the distribution of output values, 100 numbers between 0 and 255.
+            Some of them have frequency more than 1, which means that there are collisions
+            after hashing. The collision rate and 1/<i>M</i> are also displayed. Try to 
+            click the "Submit" button multiple times, you can see that collision rate is
+            smaller than 1/<i>M</i> at most time and no more than 1/<i>M</i> in average.
+            <br>2. Try to decrease output dim to 5, you can see that frequencies in the 
+            bottom graph increases which means that number of collisions increases. In
+            addition, collision rate also tends to increase. Try more values of these
+            arguments and see how the results look like.
+        </p>
+    </div>
+    <div class="container">
+        <div class="controls">
+            <label for="input_dim">input dim (&le;15):</label>
+            <input id="input_dim" type="number" placeholder="0" max="15" min="0" value required/>
+            <label for="output_dim">output dim (&le;10):</label>
+            <input id="output_dim" type="number" placeholder="0" max="10" min="0" value required/>
+            <label for="input_size">number of inputs (&le;200):</label>
+            <input id="input_size" type="number" placeholder="1" max="200" min="1" value required/>
+            <input id="submit_hash" type="submit" value="Submit" onclick="control_hash()"/>
+        </div>
+        <div id="hash_plot"></div>
+    </div>
+
+    <div id="main">
+        <h2>Count-Min Sketch</h2>
+        <p>
+            When we need to process a large amount of stream data with limited
+            space and time, we can use count-min sketch algorithm which is based
+            on universal hash functions. For a vector <i>a</i> = 
+            (<i>a<sub>1</sub></i>, ..., <i>a<sub><i>U</i></sub></i>) &in;
+            Z<sup><i>U</i></sup>, we can do frequency query with count-min sketch. 
+            For each element <i>e</i> in <i>a</i>, <i>a<sub><i>e</i></sub></i>
+            is the frequency of <i>e</i> and &atilde;<sub><i>e</i></sub> is the 
+            estimate of <i>a<sub><i>e</i></sub></i>.
+            <br>1. Independently sample <i>h<sub>1</sub></i>, ..., 
+            <i>h<sub><i>l</i></sub></i> hash functions from the universal family 
+            <i>H</i>.
+            <br>2. Initialize arrays <i>A<sub>1</sub></i>, ..., 
+            <i>A<sub><i>l</i></sub></i> with all zeros.
+            <br>3. When we deal with <i>e</i>, we add 
+            <i>A</i><sub><i>k</i></sub>[<i>h</i><sub><i>k</i></sub>(<i>e</i>)] by 1
+            for all <i>k</i> &in; {1, ..., <i>l</i>}.
+            <br>4. When query the frequency of <i>e</i>, return 
+            &atilde;<sub><i>e</i></sub> = min<sub>k &in; {1, ..., <i>l</i>}</sub>
+            <i>A</i><sub><i>k</i></sub>[<i>h</i><sub><i>k</i></sub>(<i>e</i>)].
+        </p>
+        <br>
+        <br>
+        <h3>Visualization tool for count-min sketch</h3>
+        <p class="tool">
+            To use this tool, you need to enter the number of inputs <i>N</i>,
+            output dim <i>m</i> and number of hash functions <i>l</i>. Then,  
+            after clicking the "Submit" button,
+            the tool will randomly generate a vector with <i>N</i> integers and
+            <i>l</i> universal hash functions with output dim <i>m</i>. Next,
+            the tool will execute count-min sketch algorithm and calculate
+            frequency of each element step by step. The true frequency of the 
+            input and estimate frequency will be displayed in red and blue
+            respectively.
+        </p>
+        <p class="tool">
+            At every step, there is a new input number. Then, the true frequency 
+            of this input increases by 1 (one new red line on the top graph), and 
+            after executing count-min algorithm, the estimate of frequency will be 
+            displayed in blue lines in the bottom graph. In the mean time, all red 
+            lines in the top graph are also displayed in the bottom graph and covers
+            blue lines. If all the blue lines are covered by red lines, then our 
+            estimate is perfectly accurate. Otherwise, more uncovered blue lines,
+            less accurate the estimate is.
+        </p>
+        <p class="tool">
+            We can see that more hash functions there are, more accurate the
+            frequency estimate is. In addition, higher output dim also decrease
+            the error of estimate.
+        </p>
+        <p class="tool"><b>Examples:</b>
+            <br>1. You can set number of inputs as 100, output dim as 4 and number
+            of hash functions as 1, and click "Submit" button. You will see that at
+            each step, there is a new input, and the frequency of that input increases
+            by 1 (one new red line of length 1 appears in both the top and the bottom graph). 
+            Then, the tool executes count-min sketch algorithm and calculates the 
+            estimate frequency of all the inputs (displayed as blue lines in the bottom 
+            graph). We can see that some
+            blue lines are covered by red lines but the others are not, which means the
+            estimate frequencies are biased and the uncovered blue lines represents the bias part.
+            <br>2. Click the "Reset" button to clear the display. Try to increase output 
+            dim to 6 and number of hash functions to 10, and click the "Submit" button.
+            You will see that the number of uncovered blue lines decreases, which means 
+            that the estimate frequencies become more accurate. Try more values of these
+            arguments and see how the results look like.
+        </p>
+        <p class="tool">
+            <b>Note:</b> 
+            <br>1. Please use the "Reset" button to clear the display. 
+            Please do not click the "Submit" button multiple times. If there is 
+            any error after clicking more than once, please refresh the page.
+            <br>2. The input dim is hardcoded as 7 in this tool to avoid too many arguments.
+            You can change its value by modifying the 
+            <a href="https://github.com/zjw49246/zjw49246.github.io">source codes</a>.
+        </p>
+    </div>
+    <div class="container">
+        <div class="controls">
+            <label for="input_size_ctm">number of inputs (&le;200):</label>
+            <input id="input_size_ctm" type="number" placeholder="1" max="200" min="1" value required/>
+            <label for="output_dim_ctm">output dim (&le;10):</label>
+            <input id="output_dim_ctm" type="number" placeholder="0" max="10" min="0" value required/>
+            <br>
+            <label for="hash_fun_num_ctm">number of hash functions (&le;20):</label>
+            <input id="hash_fun_num_ctm" type="number" placeholder="1" max="20" min="1" value required/>
+            <input id="submit_ctm" type="submit" value="Submit" onclick="control_ctm()"/>
+            <input id="reset_ctm" type="submit" value="Reset" onclick="reset_ctm()"/>
+        </div>
+        <div id="ctm_plot"></div>
+    </div>
+
+    <script src="universal_hash.js"></script>
+    <script src="count_min.js"></script>
+</body>
+</html>
